@@ -6,10 +6,12 @@ import { BoardState } from "./types/types";
 function App() {
   const [board, setBoard] = useState<BoardState>(Array(9).fill(null));
 
+  const currentPlayer = board.filter(Boolean).length % 2 === 0 ? "X" : "O";
+
   const handleClick = (index: number) => {
-    console.log(index);
-    setBoard(board.map((square, i) => (index === i ? "X" : square)));
+    setBoard(board.map((square, i) => (index === i ? currentPlayer : square)));
   };
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-blue-200">
       <div className="w-full max-w-lg rounded-2xl bg-blue-100 p-8">
@@ -20,7 +22,9 @@ function App() {
           </h1>
         </div>
         <div className="mb-6 text-center">
-          <p className="text-xl font-semibold text-gray-100">Player X' turn </p>
+          <p className="text-xl font-semibold text-gray-100">
+            Player {currentPlayer} turn{" "}
+          </p>
         </div>
         <Board board={board} onClick={handleClick} />
       </div>
