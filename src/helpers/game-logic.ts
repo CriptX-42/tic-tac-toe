@@ -17,7 +17,6 @@ export const WINNING_COMBINATIONS = [
 export const checkWinner = (board: BoardState): Player | null => {
   for (const combo of WINNING_COMBINATIONS) {
     const [index1, index2, index3] = combo;
-
     if (
       board[index1] &&
       board[index1] === board[index2] &&
@@ -27,4 +26,8 @@ export const checkWinner = (board: BoardState): Player | null => {
     }
   }
   return null;
+};
+
+export const isBoardFull = (board: BoardState) => {
+  return !board.includes(null);
 };
