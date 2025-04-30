@@ -1,4 +1,5 @@
 import { Player } from "../types/types";
+import { motion } from "motion/react";
 
 type SquareProps = {
   value: Player | null;
@@ -17,12 +18,24 @@ const getBorderColor = (value: Player | null, isWinner: boolean) => {
 
 function Square({ value, onClick, isWinner }: SquareProps) {
   return (
-    <button
+    <motion.button
       onClick={onClick}
       className={`mx-auto h-32 w-32 rounded-xl border-4 border-gray-200 text-4xl font-bold ${getTextColor(value)} ${getBorderColor(value, isWinner)}`}
+      initial={{ scale: 0 }}
+      animate={{ scale: 1 }}
+      whileTap={{ scale: 0.95 }}
+      whileHover={{ scale: 1.05 }}
     >
-      {value}
-    </button>
+      {value && (
+        <motion.span
+          className="block"
+          initial={{ scale: 0, rotate: -180 }}
+          animate={{ scale: 1, rotate: 0 }}
+        >
+          {value}
+        </motion.span>
+      )}
+    </motion.button>
   );
 }
 
